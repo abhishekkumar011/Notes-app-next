@@ -9,8 +9,23 @@ export default function Home() {
           All Notes
         </h2>
         <h2 className="text-gray-700 text-2xl font-bold">Notes App📒</h2>
-        <button className="text-white bg-blue-600 w-fit px-4 py-2 rounded-full cursor-pointer">
+        <button className="text-white bg-blue-600 w-fit px-4 py-2 rounded-full">
           Add Note
+        </button>
+      </div>
+
+      {/* Input Field */}
+      <div className="px-10 mt-10 text-black flex gap-4">
+        <input
+          type="text"
+          className="w-full rounded-lg shadow-md px-4"
+          placeholder="Type Your Notes...."
+        />
+        <button className="text-white bg-green-600 w-fit px-4 py-2 rounded-full">
+          Save
+        </button>
+        <button className="text-white bg-red-600 w-fit px-4 py-2 rounded-full">
+          Cancel
         </button>
       </div>
 
