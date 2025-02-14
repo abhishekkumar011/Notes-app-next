@@ -13,6 +13,12 @@ export default function Home() {
           Add Note
         </button>
       </div>
+
+      <div className="mt-10 px-10 grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-10">
+        <Notes />
+        <Notes />
+        <Notes />
+      </div>
     </div>
   );
 }
