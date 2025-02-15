@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Notes from "./components/Notes";
 import { v4 as uuidv4 } from "uuid";
 
@@ -9,12 +9,26 @@ export default function Home() {
   const [notes, setNotes] = useState([]);
   const [noteMsg, setNoteMsg] = useState("");
 
+  //Load notes from localstorage when the component mounts
+  useEffect(() => {
+    const savedNotes = localStorage.getItem("notes");
+    if (savedNotes) {
+      setNotes(JSON.parse(savedNotes)); // Convert JSON string back to array
+    }
+  }, []);
+
+  const saveToLocalStorage = (notes) => {
+    localStorage.setItem("notes", JSON.stringify(notes)); // Convert array to JSON string
+  };
+
   //Add Notes
   const addNote = () => {
     if (noteMsg.trim()) {
       // Generate a unique ID for each note
       const newNote = { id: uuidv4(), text: noteMsg };
-      setNotes([...notes, newNote]);
+      const updatedNotes = [...notes, newNote];
+      setNotes(updatedNotes);
+      saveToLocalStorage(updatedNotes); // Save to localStorage
       setNoteMsg("");
     }
   };
@@ -22,14 +36,16 @@ export default function Home() {
   //Clear input field when click on cancel if text is exists
   const clearField = () => {
     if (noteMsg.trim()) {
-      setIsOpen(false);
       setNoteMsg("");
     }
+    setIsOpen(false);
   };
 
   //Delete Note
   const deleteNote = (id) => {
-    setNotes(notes.filter((note) => note.id !== id));
+    const updatedNotes = notes.filter((note) => note.id !== id);
+    setNotes(updatedNotes);
+    saveToLocalStorage(updatedNotes);
   };
 
   return (
