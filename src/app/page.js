@@ -27,6 +27,11 @@ export default function Home() {
     }
   };
 
+  //Delete Note
+  const deleteNote = (id) => {
+    setNotes(notes.filter((note) => note.id !== id));
+  };
+
   return (
     <div className="px-20 py-10">
       {/* Navbar */}
@@ -74,7 +79,12 @@ export default function Home() {
 
       <div className="mt-10 px-10 grid grid-cols-[repeat(auto-fit,_minmax(250px,_1fr))] gap-10">
         {notes.map((note) => (
-          <Notes key={note.id} id={note.id} text={note.text} />
+          <Notes
+            key={note.id}
+            id={note.id}
+            text={note.text}
+            deleteNote={deleteNote}
+          />
         ))}
       </div>
     </div>
